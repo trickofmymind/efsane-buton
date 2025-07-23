@@ -1,13 +1,19 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="tr">
 <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Efsane Buton</title>
-    <script src="/socket.io/socket.io.js"></script>
-    <script defer src="script.js"></script>
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <h1>🖱️ Tıklama Sayısı: <span id="sayac">0</span></h1>
-    <button id="buton">Tıkla Efsane Ol!</button>
+    <div class="container">
+        <h1 class="title">Tıklandıkça Efsaneleşen Buton</h1>
+        <button id="buton">🔥 Tıkla</button>
+        <p class="count"><span id="sayac">0</span> kez tıklandı</p>
+    </div>
+
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

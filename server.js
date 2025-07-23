@@ -1,6 +1,7 @@
 ﻿const express = require("express");
 const http = require("http");
 const cors = require("cors");
+const path = require("path");
 const { Server } = require("socket.io");
 
 const app = express();
@@ -12,21 +13,24 @@ const io = new Server(server, {
     }
 });
 
+app.use(cors());
+app.use(express.static(path.join(__dirname, "public")));
+
 let clickCount = 0;
 
 io.on("connection", (socket) => {
-    console.log("Bağlandı:", socket.id);
+    console.log("Bir kullanıcı bağlandı:", socket.id);
     socket.emit("updateClickCount", clickCount);
+
     socket.on("butonaTiklandi", () => {
         clickCount++;
         io.emit("updateClickCount", clickCount);
     });
+
     socket.on("disconnect", () => {
-        console.log("Ayrıldı:", socket.id);
+        console.log("Bir kullanıcı ayrıldı:", socket.id);
     });
 });
-
-app.use(express.static("public")); // Statik dosyaları yükle
 
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
